@@ -1,0 +1,359 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap');
+
+  .pf-root { font-family: 'Space Grotesk', var(--font-sans); color: var(--color-text-primary); padding: 0; }
+
+  .ticker-wrap { overflow: hidden; border-top: 1px solid var(--color-border-tertiary); border-bottom: 1px solid var(--color-border-tertiary); padding: 8px 0; margin-bottom: 0; }
+  .ticker-track { display: flex; gap: 0; white-space: nowrap; animation: ticker 22s linear infinite; }
+  .ticker-track span { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; color: var(--color-text-secondary); padding: 0 24px; }
+  .ticker-track span.dot { color: var(--color-text-info); padding: 0; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .hero { padding: 2.5rem 1.5rem 1.5rem; }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; color: var(--color-text-secondary); margin-bottom: 12px; text-transform: uppercase; }
+  .hero-name { font-family: 'Syne', var(--font-sans); font-size: 52px; font-weight: 800; line-height: 1.05; margin: 0 0 14px; color: var(--color-text-primary); }
+  .hero-name em { font-style: normal; color: var(--color-text-info); }
+  .hero-tagline { font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; max-width: 560px; margin-bottom: 20px; }
+  .hero-reloc { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; background: var(--color-background-warning); color: var(--color-text-warning); padding: 7px 14px; border-radius: 999px; font-weight: 500; margin-bottom: 6px; }
+
+  .contact-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .contact-chip { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-secondary); background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 6px 12px; text-decoration: none; }
+  .contact-chip:hover { border-color: var(--color-border-primary); color: var(--color-text-primary); }
+
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border-top: 0.5px solid var(--color-border-tertiary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .stat-cell { padding: 1rem; text-align: center; background: var(--color-background-primary); }
+  .stat-cell:not(:last-child) { border-right: 0.5px solid var(--color-border-tertiary); }
+  .stat-num { font-family: 'Syne', var(--font-sans); font-size: 22px; font-weight: 800; color: var(--color-text-primary); display: block; }
+  .stat-lbl { font-size: 11px; color: var(--color-text-secondary); letter-spacing: 0.08em; margin-top: 2px; display: block; }
+
+  .tabs-wrap { padding: 1.5rem 1.5rem 0; }
+  .tab-btns { display: flex; gap: 4px; border-bottom: 1px solid var(--color-border-tertiary); margin-bottom: 1.5rem; }
+  .tab-btn { font-family: 'Space Grotesk', var(--font-sans); font-size: 13px; font-weight: 500; padding: 8px 16px; border: none; background: none; cursor: pointer; color: var(--color-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s, border-color 0.15s; }
+  .tab-btn.active { color: var(--color-text-primary); border-bottom-color: var(--color-text-primary); }
+  .tab-btn:hover:not(.active) { color: var(--color-text-primary); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .exp-item { display: grid; grid-template-columns: 140px 1fr; gap: 0 20px; padding: 1.2rem 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-dates { font-size: 12px; color: var(--color-text-secondary); padding-top: 3px; line-height: 1.5; }
+  .exp-title { font-size: 15px; font-weight: 500; margin: 0 0 2px; }
+  .exp-org { font-size: 13px; color: var(--color-text-secondary); margin: 0 0 8px; }
+  .exp-bullets { margin: 0; padding-left: 16px; }
+  .exp-bullets li { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 4px; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--color-background-info); color: var(--color-text-info); letter-spacing: 0.04em; }
+  .tag.teal { background: var(--color-background-success); color: var(--color-text-success); }
+  .tag.amber { background: var(--color-background-warning); color: var(--color-text-warning); }
+
+  .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .proj-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.1rem; }
+  .proj-card-title { font-size: 14px; font-weight: 500; margin: 0 0 6px; }
+  .proj-card-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; margin: 0 0 10px; }
+
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 1rem; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .skill-group { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.85rem 1rem; }
+  .skill-group-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .skill-group-items { font-size: 12px; color: var(--color-text-primary); line-height: 1.6; }
+
+  .footer-bar { border-top: 0.5px solid var(--color-border-tertiary); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-bar span { font-size: 12px; color: var(--color-text-secondary); }
+</style>
+
+<div class="pf-root">
+
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+
+  <div class="hero">
+    <p class="hero-eyebrow">Portfolio — Data • Education • Creator</p>
+    <h1 class="hero-name">Jhanvi<br><em>Varma.</em></h1>
+    <p class="hero-tagline">MS Data Science · Educator · Founder of JV Media & Analytics · Instagram creator with 182K following built in 6 months. I work at the intersection of data, people, and storytelling.</p>
+    <div class="hero-reloc">
+      <i class="ti ti-map-pin" aria-hidden="true"></i>
+      Bridgeport, CT — but honestly? I can relocate anywhere you want. I love new places.
+    </div>
+    <div class="contact-row">
+      <a href="mailto:mailtojhanvi@gmail.com" class="contact-chip">
+        <i class="ti ti-mail" aria-hidden="true"></i> mailtojhanvi@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/jhanvivarma/" class="contact-chip" target="_blank">
+        <i class="ti ti-brand-linkedin" aria-hidden="true"></i> linkedin.com/in/jhanvivarma
+      </a>
+      <a href="https://www.instagram.com/jaanv_the_parrot" class="contact-chip" target="_blank">
+        <i class="ti ti-brand-instagram" aria-hidden="true"></i> @jaanv_the_parrot
+      </a>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-cell"><span class="stat-num">182K</span><span class="stat-lbl">Instagram followers</span></div>
+    <div class="stat-cell"><span class="stat-num">4+</span><span class="stat-lbl">Years teaching</span></div>
+    <div class="stat-cell"><span class="stat-num">3</span><span class="stat-lbl">ML projects shipped</span></div>
+    <div class="stat-cell"><span class="stat-num">30+</span><span class="stat-lbl">Brand pitches sent</span></div>
+  </div>
+
+  <div class="tabs-wrap">
+    <div class="tab-btns">
+      <button class="tab-btn active" onclick="switchTab('work')">Work Experience</button>
+      <button class="tab-btn" onclick="switchTab('teaching')">Teaching</button>
+      <button class="tab-btn" onclick="switchTab('leadership')">Leadership</button>
+      <button class="tab-btn" onclick="switchTab('projects')">Projects</button>
+      <button class="tab-btn" onclick="switchTab('skills')">Skills</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-work">
+      <p class="section-label">Work Experience</p>
+
+      <div class="exp-item">
+        <div class="exp-dates">Dec 2025 – Present</div>
+        <div>
+          <p class="exp-title">Founder & Analytics Strategist</p>
+          <p class="exp-org">JV Media & Analytics · @jaanv_the_parrot</p>
+          <ul class="exp-bullets">
+            <li>Grew Instagram to 182K followers in under 6 months through data-driven content strategy</li>
+            <li>Tracked reach, engagement, share rate (2%+), and audience demographics using custom Excel dashboards</li>
+            <li>Built data-backed media kits for 30+ brand outreach pitches with CPE benchmarks and ROI projections</li>
+            <li>Audience profile: 70%+ Indian, 18–34 — high-value for South Asian D2C & US-expansion brands</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Instagram Analytics</span><span class="tag">Brand Strategy</span><span class="tag teal">Media Kits</span><span class="tag amber">Creator Economy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Aug – Dec 2025</div>
+        <div>
+          <p class="exp-title">Data Analyst & Reporting Intern</p>
+          <p class="exp-org">Fairfield University · Fairfield, CT</p>
+          <ul class="exp-bullets">
+            <li>Built Tableau and Power BI dashboards tracking institutional KPIs for senior leadership</li>
+            <li>Queried and transformed datasets using SQL and Snowflake; streamlined recurring reporting pipelines</li>
+            <li>Performed EDA to surface enrollment and retention trends; delivered exec-ready presentations</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">SQL</span><span class="tag">Tableau</span><span class="tag">Power BI</span><span class="tag teal">Snowflake</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">May – Aug 2025</div>
+        <div>
+          <p class="exp-title">Scheduling Supervisor</p>
+          <p class="exp-org">Conference & Event Management · Fairfield University</p>
+          <ul class="exp-bullets">
+            <li>Managed scheduling workflows for 30+ students using CEM systems; resolved logistics conflicts</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Apr 2026 – Present</div>
+        <div>
+          <p class="exp-title">Math, Science & IT Teacher</p>
+          <p class="exp-org">Bridgeport Hope School · Bridgeport, CT</p>
+          <ul class="exp-bullets">
+            <li>Teaching Math, Science, and IT to Grades 6–10; integrating data literacy and coding into STEM lessons</li>
+          </ul>
+          <div class="tag-row"><span class="tag teal">Current Role</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-teaching">
+      <p class="section-label">Teaching Experience</p>
+
+      <div class="exp-item">
+        <div class="exp-dates">Apr 2026 – Present</div>
+        <div>
+          <p class="exp-title">Math, Science & IT Teacher</p>
+          <p class="exp-org">Bridgeport Hope School · Bridgeport, CT</p>
+          <ul class="exp-bullets">
+            <li>Teaching Math (Algebra, Statistics), Science, and IT to Grades 6–10</li>
+            <li>Integrating data literacy and coding fundamentals into everyday STEM lessons</li>
+            <li>Designing lesson plans, adapting delivery to diverse learning needs</li>
+          </ul>
+          <div class="tag-row"><span class="tag teal">Current</span><span class="tag">K-12</span><span class="tag">STEM</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Jan – May 2025</div>
+        <div>
+          <p class="exp-title">Teaching Assistant — Theory of Programming</p>
+          <p class="exp-org">Fairfield University · Fairfield, CT</p>
+          <ul class="exp-bullets">
+            <li>Supported 30+ students through a core programming theory course; managed all grading</li>
+            <li>Held office hours, provided 1-on-1 guidance on programming fundamentals and logic</li>
+          </ul>
+          <div class="tag-row"><span class="tag">University Level</span><span class="tag amber">Programming</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">May – Aug 2024</div>
+        <div>
+          <p class="exp-title">Assistant Lecturer & Lab Technician</p>
+          <p class="exp-org">Cybersecurity Bootcamp · Fairfield University</p>
+          <ul class="exp-bullets">
+            <li>Designed and delivered hands-on exercises covering Splunk, Linux, Kali Linux, Wireshark, SSH</li>
+            <li>Guided students through complex technical configurations; bridged theory and practice</li>
+          </ul>
+          <div class="tag-row"><span class="tag">Splunk</span><span class="tag">Kali Linux</span><span class="tag">Wireshark</span><span class="tag amber">Cybersecurity</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Jan 2020 – Jan 2024</div>
+        <div>
+          <p class="exp-title">Secondary School Teacher — Math & Science</p>
+          <p class="exp-org">Rajgruha Academy · Mumbai, India</p>
+          <ul class="exp-bullets">
+            <li>Taught Math and Science to secondary school students for 4 years</li>
+            <li>Designed curriculum, lesson plans, and assessments; developed remedial programs for struggling students</li>
+            <li>Built strong parent-teacher relationships; consistently improved class-level outcomes</li>
+          </ul>
+          <div class="tag-row"><span class="tag">4 Years</span><span class="tag teal">India</span><span class="tag">Curriculum Design</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-leadership">
+      <p class="section-label">Leadership & Coordination</p>
+
+      <div class="exp-item">
+        <div class="exp-dates">Aug 2024 – Dec 2025</div>
+        <div>
+          <p class="exp-title">Graduate Resident Coordinator</p>
+          <p class="exp-org">Fairfield University · Fairfield, CT</p>
+          <ul class="exp-bullets">
+            <li>Supervised and mentored 2 Commuter Peer Assistants (CPAs) reporting directly to me</li>
+            <li>Organized student programming, academic support events, and community-building initiatives</li>
+            <li>Managed administrative reporting and scheduling workflows for residential and commuter programs</li>
+          </ul>
+          <div class="tag-row"><span class="tag">Team Management</span><span class="tag teal">Student Development</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">May – Aug 2025</div>
+        <div>
+          <p class="exp-title">Scheduling Supervisor</p>
+          <p class="exp-org">Conference & Event Management · Fairfield University</p>
+          <ul class="exp-bullets">
+            <li>Managed scheduling and logistics data for 30+ students in CEM system</li>
+            <li>Resolved scheduling conflicts, tracked operational KPIs, ensured smooth event coordination</li>
+          </ul>
+          <div class="tag-row"><span class="tag">Operations</span><span class="tag amber">30+ Students</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Dec 2025 – Present</div>
+        <div>
+          <p class="exp-title">Founder — JV Media & Analytics</p>
+          <p class="exp-org">Self · Bridgeport, CT</p>
+          <ul class="exp-bullets">
+            <li>Built and run a sole proprietorship managing creator brand, analytics, and partnerships</li>
+            <li>End-to-end ownership: content strategy, brand outreach pipeline, deal negotiation, post-campaign reporting</li>
+          </ul>
+          <div class="tag-row"><span class="tag">Founder</span><span class="tag teal">Brand Management</span><span class="tag amber">Business Development</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-projects">
+      <p class="section-label">Projects</p>
+      <div class="proj-grid">
+        <div class="proj-card">
+          <p class="proj-card-title">Skin Undertone Analyzer</p>
+          <p class="proj-card-desc">CV-based classification system analyzing 100K+ skin pixels per inference using HSV segmentation and LAB color stats. Deployed on Streamlit Cloud with dual-light robustness logic.</p>
+          <div class="tag-row"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag teal">Streamlit</span></div>
+        </div>
+        <div class="proj-card">
+          <p class="proj-card-title">Property Sale Prediction</p>
+          <p class="proj-card-desc">Led capstone ML project for Hodson Realty CT. EDA, SMOTE, Random Forest & Logistic Regression, interactive Streamlit dashboard. Served as Project Manager & ML Developer.</p>
+          <div class="tag-row"><span class="tag">Scikit-learn</span><span class="tag">SMOTE</span><span class="tag amber">PM Role</span></div>
+        </div>
+        <div class="proj-card">
+          <p class="proj-card-title">RFM Customer Segmentation</p>
+          <p class="proj-card-desc">End-to-end customer segmentation using Recency, Frequency, Monetary scoring. Power BI dashboard with DAX measures, KPI cards, and dynamic revenue share analysis.</p>
+          <div class="tag-row"><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag teal">DAX</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-skills">
+      <p class="section-label">Technical Skills</p>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-label">Languages</div>
+          <div class="skill-group-items">Python · SQL · DAX</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">BI & Viz</div>
+          <div class="skill-group-items">Tableau · Power BI · Google Data Studio · Excel</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Data & ML</div>
+          <div class="skill-group-items">Pandas · NumPy · Scikit-learn · OpenCV · Snowflake</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Cybersecurity</div>
+          <div class="skill-group-items">Splunk · Kali Linux · Wireshark · SSH · Linux</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Tools</div>
+          <div class="skill-group-items">Streamlit · Git · Canva · Google Classroom</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Creator Stack</div>
+          <div class="skill-group-items">Instagram Insights · Meta Ads · Media Kit Design</div>
+        </div>
+      </div>
+
+      <p class="section-label" style="margin-top:1.5rem;">Education</p>
+      <div class="exp-item">
+        <div class="exp-dates">Dec 2025</div>
+        <div>
+          <p class="exp-title">MS, Data Science</p>
+          <p class="exp-org">Fairfield University · Fairfield, CT</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dates">2021</div>
+        <div>
+          <p class="exp-title">BS, Computer Science</p>
+          <p class="exp-org">Mumbai University · Mumbai, India</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Jhanvi Varma · Bridgeport, CT</span>
+    <span>Open to relocate · OPT Authorized</span>
+  </div>
+</div>
+
+<script>
+  const items = ["182K INSTAGRAM FOLLOWERS","DATA ANALYST","EDUCATOR","BRIDGEPORT CT","MS DATA SCIENCE","OPEN TO RELOCATE","COMPUTER VISION","POWER BI · TABLEAU","CREATOR ECONOMY","SQL · PYTHON","FAIRFIELD UNIVERSITY"];
+  const track = document.getElementById('ticker');
+  const full = [...items,...items].map(t=>`<span>${t}</span><span class="dot">·</span>`).join('');
+  track.innerHTML = full;
+
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
